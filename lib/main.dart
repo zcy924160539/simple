@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true, // 小文本适应
       splitScreenMode: true, // 分屏模式
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Simple',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         ),
