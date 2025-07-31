@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:simple/enum/count_change_type.dart';
+import 'package:dio/dio.dart';
 
 import 'bloc.dart';
 import 'event.dart';
@@ -33,14 +34,10 @@ class HomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(countData),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _button(context, CountChangeType.increment),
-                    SizedBox(width: 30.w),
-                    _button(context, CountChangeType.decrement),
-                  ],
-                )
+                // 计算数值
+                _computed(context),
+                // 发请求
+                _request(),
               ],
             ),
           );
@@ -49,7 +46,37 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _button(BuildContext context, CountChangeType type) {
+  _computed(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        _button(context, CountChangeType.increment),
+        SizedBox(width: 30.w),
+        _button(context, CountChangeType.decrement),
+      ],
+    );
+  }
+
+  _request() {
+    return GestureDetector(
+      onTap: _getRes,
+      child: const Text('getRes'),
+    );
+  }
+
+  _getRes() async {
+    Dio dio = Dio();
+    Response response = await dio.post(
+      'https://slwl-api.itheima.net/driver/driver/login/account',
+      data: {
+        "account": "xbsj001",
+        "password": "123456",
+      },
+    );
+    print(response);
+  }
+
+  _button(BuildContext context, CountChangeType type) {
     return GestureDetector(
       onTap: () => _onTapChange(context: context, type: type),
       child: Text(CountChangeType.format(type.name).name),
