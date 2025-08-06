@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simple/utils/images_constant.dart';
 
 class StartPage extends StatelessWidget {
   const StartPage({super.key});
@@ -8,7 +9,7 @@ class StartPage extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/start_bg.png'),
+          image: AssetImage(ImagesConstant.START_BG),
           fit: BoxFit.contain,
         ),
       ),
